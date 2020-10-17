@@ -119,7 +119,9 @@ def quit(sortStu):  # 프로그램 종료 함수
     saveData = saveData.lower()
     if saveData == 'yes':
         fileName2 = input('File name: ')  # 성적 정보 저장
-        with open(fileName2, 'w') as f:
+        if fileName2 == '':
+            fileName2 = 'students.txt'
+        with open('./data/'+fileName2, 'w') as f:
             for stu in sortStu:
                 f.write(str(stu[0])+'\t'+str(stu[1][0])+'\t'+str(stu[1][1])+'\t'+str(stu[1][2])+'\n')
     else:
@@ -129,8 +131,8 @@ stuInfo = {}  # 학생정보를 저장하기 위한 딕셔너리 변수
 filename = 'students.txt'
 if len(sys.argv)>1:
     filename = str(sys.argv[1])
-if os.path.exists('./%s' % filename):
-    with open(filename, 'r') as f:
+if os.path.exists('./data/%s' % filename):
+    with open('./data/'+filename, 'r') as f:
         for line in f:
             lineLi = line.split()
             aveValue = calc_average(lineLi[3], lineLi[4])
