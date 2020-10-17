@@ -140,29 +140,28 @@ if os.path.exists('./data/%s' % filename):
 
     sortStu = sorted(stuInfo.items(), key=lambda x: x[1][3], reverse=True)
     show(sortStu)
-
-    while True:
-        sortStu = sorted(stuInfo.items(), key=lambda x: x[1][3], reverse=True)
-        print('\n#', end=' ')
-        order = input()
-        order = order.lower()
-        if order == 'show':
-            show(sortStu)
-        elif order == 'search':
-            search(stuInfo, '')
-        elif order == 'changescore':
-            changescore(stuInfo)
-        elif order == 'searchgrade':
-            searchgrade(sortStu)
-        elif order == 'add':
-            add(stuInfo)
-        elif order == 'remove':
-            remove(stuInfo)
-        elif order == 'quit':
-            quit(sortStu)
-            break
-        else:
-            continue
-
 else:
     print('NO SUCH FILE')
+
+while True:
+    sortStu = sorted(stuInfo.items(), key=lambda x: x[1][3], reverse=True) #개선방향 : 소트를 매번 하지 않고 우선순위 큐와 병행해서 관리하여 show가 있을 떄만 출력하여 리스트에 저장하도록 수정 -> 속도와 메모리 trade-off
+    print('\n#', end=' ')
+    order = input()
+    order = order.lower()
+    if order == 'show':
+        show(sortStu)
+    elif order == 'search':
+        search(stuInfo, '')
+    elif order == 'changescore':
+        changescore(stuInfo)
+    elif order == 'searchgrade':
+        searchgrade(sortStu)
+    elif order == 'add':
+        add(stuInfo)
+    elif order == 'remove':
+        remove(stuInfo)
+    elif order == 'quit':
+        quit(sortStu)
+        break
+    else:
+        continue
